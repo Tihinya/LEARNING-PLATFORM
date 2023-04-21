@@ -1,0 +1,23 @@
+{
+  "name": "securex",
+  "version": "1.0.0",
+  "description": "Link to Jira project: https://idamaa.atlassian.net/jira/software/projects/SEC/boards/2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tcellect/secureX.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tcellect/secureX/issues"
+  },
+  "homepage": "https://github.com/tcellect/secureX#readme",
+  "devDependencies": {
+    "prettier": "2.8.7"
+  }
+}
