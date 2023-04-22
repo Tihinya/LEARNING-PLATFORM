@@ -1,9 +1,5 @@
 const apiKey = "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"
-
-const chatOutput = document.getElementById("chat-output")
-const userInput = document.getElementById("user-input")
-const sendBtn = document.getElementById("send-btn")
-
+let score = 5
 function handlePrompt(newMessage, messageHistory = [], callback) {
     if (newMessage === "") {
         return
@@ -42,20 +38,28 @@ const summary = (data) => {
     } else if (wrongReg.test(botMessage)) {
         score--
     }
+    const chatOutput = document.getElementById("chat-output")
+    chatOutput.innerHTML += `<div><strong>Chatbot:</strong> ${botMessage}</div>`
 }
 
-let messageHistory = [
-    {
-        role: "user",
-        content: "Save my score: my score  is " + score + " points",
-    },
-]
+function testPrompt() {
+    let messageHistory = [
+        {
+            role: "user",
+            content: "Save my score: my score is " + score + " points",
+        },
+    ]
 
-handlePrompt(
-    "You are a cybersecurity specialist. Create a question with an answer choice about Phishing. On a scale from 1 to 10 I understand this topic on " +
-        score +
-        ". Do not write an answer.",
-    messageHistory,
-    summary
-)
-export { chatWithBot }
+    const sendBtn = document.getElementById("send-btn")
+    sendBtn.addEventListener("click", () => {
+        const userInput = document.getElementById("user-input")
+        const chatOutput = document.getElementById("chat-output")
+        chatOutput.innerHTML += `<div><strong>You:</strong> ${userInput.value}</div>`
+        handlePrompt(userInput.value, messageHistory, summary)
+        userInput.value = ""
+    })
+}
+
+testPrompt()
+
+export { handlePrompt, summary }
