@@ -1,6 +1,5 @@
 const apiKey = "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"
 let messages = []
-let systemOutput = ""
 
 const chatOutput = document.getElementById("chat-output")
 const userInput = document.getElementById("user-input")
@@ -11,10 +10,9 @@ sendBtn.addEventListener("click", () => {
     if (newMessage !== "") {
         // display user message in chat output
         chatOutput.innerHTML += `<div><strong>You:</strong> ${newMessage}</div>`
-
+        messages.push({ role: "user", content: newMessage })
         // clear user input
         userInput.value = ""
-
         // generate response from chatbot
         fetch("https://api.openai.com/v1/chat/completions", {
             method: "POST",
@@ -24,7 +22,7 @@ sendBtn.addEventListener("click", () => {
             },
             body: JSON.stringify({
                 model: "gpt-3.5-turbo",
-                messages: [{ role: "user", content: newMessage }],
+                messages: messages,
                 max_tokens: 100,
             }),
         })
