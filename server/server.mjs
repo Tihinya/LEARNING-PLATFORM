@@ -1,36 +1,30 @@
 import express from "express"
 import cors from "cors"
 import path from "path"
-import { fileURLToPath } from "url"
-import { dirname } from "path"
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
+import { __dirname, port } from "./config.mjs"
+import {
+    IndexPage,
+    MaterialsPage,
+    SendMessage,
+    GetCategories,
+    CustomRouter,
+} from "./listeners.mjs"
 
 const app = express()
-const port = 3000
-app.use(express.json())
 app.use(
     cors({
         origin: "*",
         methods: "*",
     })
 )
+app.use(express.json())
+app.use(express.static(path.join(__dirname, "..", "src")))
 
-//get request to '/'
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "/test.html"))
-})
-
-//post request to '/'
-app.post("/", (req, res) => {
-    try {
-        console.log(req.body)
-        res.json({ message: "Data received successfully!" })
-    } catch (err) {
-        console.error(err)
-        res.status(400).json({ error: "Invalid JSON data in request body" })
-    }
-})
+app.get("/", IndexPage)
+app.get("/materials", MaterialsPage)
+app.get("/categories", GetCategories)
+app.post("/message/send", SendMessage)
+app.use("/", CustomRouter)
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`)

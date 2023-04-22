@@ -18,12 +18,12 @@ function updateCategory({ categories = [] }) {
         let category = document.createElement("li")
         category.className = "categories__item"
         category.textContent = categoryName
-        category.onclick(() => {
+        category.onclick = () => {
             fetch(`/${categoryName}`)
                 .then((r) => r.json())
                 .catch(() => [])
                 .then(updateMessages(true))
-        })
+        }
 
         categoriesList.appendChild(category)
     })
@@ -67,10 +67,7 @@ chatInput.onkeydown = (e) => {
 
     e.preventDefault()
 
-    let newText = messageBoxInput.innerHTML
-        .replaceAll("<br>", "\n")
-        .replaceAll("&nbsp;", " ")
-        .trim()
+    const newText = e.target.value.trim()
 
     if (newText === "") {
         return
@@ -78,15 +75,14 @@ chatInput.onkeydown = (e) => {
 
     fetch("/message/send", {
         method: "POST",
-        body: JSON.stringify({ message: newText })
-            .then((r) => r.json())
-            .catch(() => [])
-            .then(updateMessages(true)),
+        body: JSON.stringify({ message: newText }),
     })
+        .then((r) => r.json())
+        .catch(() => [])
+        .then(updateMessages(true))
 
     updateMessages()({ role: "user", content: newText })
-
-    messageBoxInput.innerHTML = ""
+    e.target.value = ""
 }
 
 getCategories()
