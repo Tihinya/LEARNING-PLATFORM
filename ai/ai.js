@@ -40,5 +40,5 @@ function chatWithBot(messages) {
     })
 }
 
-chatWithBot([])
+chatWithBot([{ role: "user", content: "Save my score: my score  is 5 points" }])
 export { chatWithBot }
