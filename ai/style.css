@@ -32,6 +32,17 @@
     cursor: pointer;
 }
 
+#start-btn {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100px;
+    height: 50px;
+}
+
 #send-btn:hover {
     background-color: #3e8e41;
 }
