@@ -21,14 +21,25 @@
         <div class="message_box">
           <div class="message_box__container">
             <div class="message_box__container-text" id="chat-box"></div>
-            <div style="height: 12rem; width: 100%"></div>
-            <div class="wrap">
-              <textarea
-                class="message_box__container-input"
-                rows="1"
-                id="chat-input"
-                placeholder="Send a message..."
-              ></textarea>
+            <div
+              style="
+                position: sticky;
+                display: flex;
+                align-items: center;
+                bottom: 0px;
+                left: 0px;
+                height: 8rem;
+                width: 100%;
+              "
+            >
+              <div class="wrap">
+                <textarea
+                  class="message_box__container-input"
+                  rows="1"
+                  id="chat-input"
+                  placeholder="Send a message..."
+                ></textarea>
+              </div>
             </div>
           </div>
         </div>

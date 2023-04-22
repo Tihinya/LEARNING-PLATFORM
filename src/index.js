@@ -24,7 +24,7 @@ function updateCategory({ categories = [] }) {
             fetch(`/${categoryName}`)
                 .then((r) => r.json())
                 .catch(() => [])
-                .then(updateMessages(true))
+                .then((r) => updateMessages(true)(...r))
         }
 
         categoriesList.appendChild(category)
@@ -37,18 +37,26 @@ function updateMessages(override = false) {
     }
 
     return (...state) => {
+        // console.log(state)
         for (const { role, content } of state) {
-            if (role === "" || content === "") {
+            console.log(role, content)
+            if (!["user", "assistant"].includes(role) || content === "") {
                 continue
             }
 
             let message = document.createElement("div")
-            message.className = "message"
+
+            message.className =
+                role === "user"
+                    ? "message"
+                    : role === "assistant"
+                    ? "message message_is-ai"
+                    : ""
             let avatar = document.createElement("div")
             avatar.className =
                 role === "user"
                     ? "message__avatar"
-                    : role === "system"
+                    : role === "assistant"
                     ? "message__avatar message__avatar_is-ai"
                     : ""
 
@@ -78,11 +86,14 @@ chatInput.onkeydown = (e) => {
     disabled = true
     fetch("/message/send", {
         method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
         body: JSON.stringify({ message }),
     })
         .then((r) => r.json())
         .catch(() => [])
-        .then(updateMessages(true))
+        .then((r) => updateMessages(true)(...r))
         .finally(() => (disabled = false))
 
     updateMessages()({ role: "user", content: message })
