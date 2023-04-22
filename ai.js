@@ -1,4 +1,4 @@
-function chatWithBot(apikey, messages) {
+function chatWithBot(messages) {
     const apiKey = "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"
 
     const chatOutput = document.getElementById("chat-output")
@@ -40,5 +40,5 @@ function chatWithBot(apikey, messages) {
     })
 }
 
-chatWithBot("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", [])
+chatWithBot([])
 export { chatWithBot }
