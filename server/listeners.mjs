@@ -1,21 +1,25 @@
-import express from "express"
 import { __dirname, categories, deafultState } from "./config.mjs"
 import path from "path"
 import { handlePrompt } from "./ai.mjs"
 
 let currentCategorie = ""
-let currentState = Object.assign({}, deafultState)
+let State = Object.assign({}, deafultState)
 
 export function IndexPage(req, res) {
     res.sendFile(path.join(__dirname, "..", "src/index.html"))
 }
 
 export function MaterialsPage(req, res) {
+    if (currentCategorie === "") {
+        res.redirect("/")
+        return
+    }
     res.sendFile(path.join(__dirname, "..", "src/materials.html"))
 }
 
-export function SendMessage(req, res) {
-    if (currentCategorie === "") {
+export function SendPrompt(req, res) {
+    const type = req.params.type
+    if (currentCategorie === "" || !["test", "material"].includes(type)) {
         res.status(403).end()
         return
     }
@@ -23,10 +27,10 @@ export function SendMessage(req, res) {
     const catecorieSnap = currentCategorie
     handlePrompt(
         req.body.message,
-        currentState[catecorieSnap],
+        State[catecorieSnap][type],
         ({ content, role }) => {
-            currentState[catecorieSnap].push({ role, content })
-            res.json(currentState[currentCategorie])
+            State[catecorieSnap][type].push({ role, content })
+            res.json(State[currentCategorie][type])
         }
     ).catch((e) => {
         console.log(e)
@@ -38,14 +42,12 @@ export function GetCategories(req, res) {
     res.json({ categories })
 }
 
-export const CustomRouter = express.Router()
-CustomRouter.get("/:categorie", ServeCategorie)
-function ServeCategorie(req, res) {
+export function ServeCategorie(req, res) {
     const categorie = req.params.categorie
 
     if (categories.includes(categorie)) {
         currentCategorie = `${categorie}`
-        res.json(currentState[categorie])
+        res.json(State[categorie]["test"])
     } else {
         res.json({ status: "No access" })
     }

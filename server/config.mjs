@@ -12,7 +12,10 @@ const categories = [
     "Abobus",
 ]
 const deafultState = categories.reduce(
-    (acc, category) => ({ ...acc, [category]: [] }),
+    (acc, category) => ({
+        ...acc,
+        [category]: { material: [], test: [] },
+    }),
     {}
 )
 
