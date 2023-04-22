@@ -11,7 +11,10 @@ const categories = [
     "Personalised Attacks",
 ]
 const deafultState = categories.reduce(
-    (acc, category) => ({ ...acc, [category]: [] }),
+    (acc, category) => ({
+        ...acc,
+        [category]: { material: [], test: [] },
+    }),
     {}
 )
 
