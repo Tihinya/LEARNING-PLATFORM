@@ -1,9 +1,16 @@
 import express from "express"
 import cors from "cors"
 import path from "path"
-import cfg from "./config.mjs"
-const app = express()
+import { __dirname, port } from "./config.mjs"
+import {
+    IndexPage,
+    MaterialsPage,
+    SendMessage,
+    GetCategories,
+    CustomRouter,
+} from "./listeners.mjs"
 
+const app = express()
 app.use(
     cors({
         origin: "*",
@@ -11,28 +18,14 @@ app.use(
     })
 )
 app.use(express.json())
-app.use(express.static(path.join(cfg.__dirname, "..", "src")))
+app.use(express.static(path.join(__dirname, "..", "src")))
 
-//get request to '/'
-app.get("/", (req, res) => {
-    res.sendFile(path.join(cfg.__dirname, "..", "src/index.html"))
-})
+app.get("/", IndexPage)
+app.get("/materials", MaterialsPage)
+app.get("/categories", GetCategories)
+app.post("/message/send", SendMessage)
+app.use("/", CustomRouter)
 
-app.get("/materials", (req, res) => {
-    res.sendFile(path.join(cfg.__dirname, "..", "src/materials.html"))
-})
-
-//post request to '/'
-app.post("/", (req, res) => {
-    try {
-        console.log(req.body)
-        res.json({ message: "Data received successfully!" })
-    } catch (err) {
-        console.error(err)
-        res.status(400).json({ error: "Invalid JSON data in request body" })
-    }
-})
-
-app.listen(cfg.port, () => {
-    console.log(`Server running at http://localhost:${cfg.port}`)
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`)
 })
