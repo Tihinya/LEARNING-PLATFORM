@@ -1,6 +1,7 @@
 import express from "express"
 import { __dirname, categories, deafultState } from "./config.mjs"
 import path from "path"
+import { handlePrompt } from "../ai/ai.mjs"
 
 let currentCategorie = ""
 let currentState = Object.assign({}, deafultState)
@@ -14,13 +15,20 @@ export function MaterialsPage(req, res) {
 }
 
 export function SendMessage(req, res) {
-    try {
-        // try to send the message to ai
-        res.json(currentState[currentCategorie])
-    } catch (err) {
-        console.error(err)
-        res.status(400).json({ error: "Invalid JSON data in request body" })
+    if (currentCategorie === "") {
+        res.status(403).end()
+        return
     }
+
+    const catecorieSnap = currentCategorie
+    handlePrompt(
+        req.body.message,
+        currentState[catecorieSnap],
+        ({ content, role }) => {
+            currentState[catecorieSnap].push({ role, content })
+            res.json(currentState[currentCategorie])
+        }
+    ).catch(() => res.status(500).end())
 }
 
 export function GetCategories(req, res) {

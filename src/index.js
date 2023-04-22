@@ -22,7 +22,7 @@ function updateCategory({ categories = [] }) {
             fetch(`/${categoryName}`)
                 .then((r) => r.json())
                 .catch(() => [])
-                .then(updateMessages(true))
+                .then((r) => updateMessages(true)(...r))
         }
 
         categoriesList.appendChild(category)
@@ -35,8 +35,10 @@ function updateMessages(override = false) {
     }
 
     return (...state) => {
+        // console.log(state)
         for (const { role, content } of state) {
-            if (role === "" || content === "") {
+            console.log(role, content)
+            if (!["user", "assistant"].includes(role) || content === "") {
                 continue
             }
 
@@ -46,7 +48,7 @@ function updateMessages(override = false) {
             avatar.className =
                 role === "user"
                     ? "message__avatar"
-                    : role === "system"
+                    : role === "assistant"
                     ? "message__avatar message__avatar_is-ai"
                     : ""
 
@@ -75,11 +77,14 @@ chatInput.onkeydown = (e) => {
 
     fetch("/message/send", {
         method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
         body: JSON.stringify({ message: newText }),
     })
         .then((r) => r.json())
         .catch(() => [])
-        .then(updateMessages(true))
+        .then((r) => updateMessages(true)(...r))
 
     updateMessages()({ role: "user", content: newText })
     e.target.value = ""
