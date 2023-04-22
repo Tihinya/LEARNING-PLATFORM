@@ -2,6 +2,8 @@ const chatBox = document.querySelector("#chat-box")
 const chatInput = document.querySelector("#chat-input")
 const categoriesList = document.querySelector("#categories-list")
 
+let disabled = false
+
 function getCategories() {
     fetch("/categories", {
         method: "GET",
@@ -61,27 +63,29 @@ function updateMessages(override = false) {
 }
 
 chatInput.onkeydown = (e) => {
-    if (e.code !== "Enter" || e.shiftKey || e.ctrlKey) {
+    if (e.code !== "Enter" || e.shiftKey || e.ctrlKey || disabled) {
         return
     }
 
     e.preventDefault()
 
-    const newText = e.target.value.trim()
+    const message = e.target.value.trim()
 
-    if (newText === "") {
+    if (message === "") {
         return
     }
 
+    disabled = true
     fetch("/message/send", {
         method: "POST",
-        body: JSON.stringify({ message: newText }),
+        body: JSON.stringify({ message }),
     })
         .then((r) => r.json())
         .catch(() => [])
         .then(updateMessages(true))
+        .finally(() => (disabled = false))
 
-    updateMessages()({ role: "user", content: newText })
+    updateMessages()({ role: "user", content: message })
     e.target.value = ""
 }
 

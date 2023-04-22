@@ -184,7 +184,7 @@ html {
 
     border-radius: 0.125rem;
 
-    background-color: #788f9c;
+    background: url("./avatar.png");
 }
 
 .message__avatar_is-ai {
