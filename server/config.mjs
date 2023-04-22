@@ -9,7 +9,6 @@ const categories = [
     "Spear Phishing",
     "Whaling",
     "Personalised Attacks",
-    "Abobus",
 ]
 const deafultState = categories.reduce(
     (acc, category) => ({ ...acc, [category]: [] }),
