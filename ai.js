@@ -1,37 +1,42 @@
 const apiKey = "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"
+let messages = []
+let systemOutput = ""
 
-const messages = [
-    {
-        role: "user",
-        content: "You're a dog",
-    },
-    {
-        role: "assistant",
-        content:
-            "As an AI language model, I do not have a physical body or the ability to be a dog. However, I can understand and respond to requests related to dogs or other topics. How may I assist you?",
-    },
-    {
-        role: "user",
-        content: "What did I write in the first message?",
-    },
-]
+const chatOutput = document.getElementById("chat-output")
+const userInput = document.getElementById("user-input")
+const sendBtn = document.getElementById("send-btn")
 
-fetch("https://api.openai.com/v1/chat/completions", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-    },
-    body: JSON.stringify({
-        max_tokens: 2000,
-        n: 1,
-        temperature: 0.5,
-        messages: messages,
-        model: "gpt-3.5-turbo",
-    }),
+sendBtn.addEventListener("click", () => {
+    const newMessage = userInput.value
+    if (newMessage !== "") {
+        // display user message in chat output
+        chatOutput.innerHTML += `<div><strong>You:</strong> ${newMessage}</div>`
+
+        // clear user input
+        userInput.value = ""
+
+        // generate response from chatbot
+        fetch("https://api.openai.com/v1/chat/completions", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${apiKey}`,
+            },
+            body: JSON.stringify({
+                model: "gpt-3.5-turbo",
+                messages: [{ role: "user", content: newMessage }],
+                max_tokens: 100,
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                const botMessage = data.choices[0].message.content
+                // display chatbot message in chat output
+                chatOutput.innerHTML += `<div><strong>Chatbot:</strong> ${botMessage}</div>`
+                console.log(botMessage)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
 })
-    .then((response) => response.json())
-    .then((data) => {
-        let output = document.getElementById("output")
-        output.textContent += data.choices[0].message.content
-    })

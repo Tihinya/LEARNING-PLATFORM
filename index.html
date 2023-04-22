@@ -1,13 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>Chatbot Application</title>
     </head>
     <body>
         <script type="module" src="ai.js"></script>
-        <textarea id="output"> </textarea>
+        <div id="chat-container">
+            <div id="chat-output"></div>
+            <div id="chat-input">
+                <input
+                    type="text"
+                    id="user-input"
+                    placeholder="Type your message..."
+                />
+                <button id="send-btn">Send</button>
+            </div>
+        </div>
     </body>
 </html>
