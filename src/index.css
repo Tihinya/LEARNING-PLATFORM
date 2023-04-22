@@ -188,7 +188,8 @@ html {
 }
 
 .message__avatar_is-ai {
-    background-color: #10a37f;
+    background: url("./dogecoin-logo.png");
+    background-size: contain;
 }
 
 .message__container {
