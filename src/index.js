@@ -37,9 +37,7 @@ function updateMessages(override = false) {
     }
 
     return (...state) => {
-        // console.log(state)
         for (const { role, content } of state) {
-            console.log(role, content)
             if (!["user", "assistant"].includes(role) || content === "") {
                 continue
             }
@@ -84,7 +82,7 @@ chatInput.onkeydown = (e) => {
     }
 
     disabled = true
-    fetch("/message/send", {
+    fetch("/test/send", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
