@@ -19,6 +19,8 @@
 #user-input {
     flex: 1;
     margin-right: 10px;
+    width: 300px;
+    height: 100px;
 }
 
 #send-btn {
