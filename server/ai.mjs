@@ -1,5 +1,5 @@
 const apiKey = "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"
-let score = 5
+
 async function handlePrompt(newMessage, messageHistory = [], callback) {
     if (newMessage === "") {
         return
@@ -16,7 +16,7 @@ async function handlePrompt(newMessage, messageHistory = [], callback) {
         body: JSON.stringify({
             model: "gpt-3.5-turbo",
             messages: messageHistory,
-            max_tokens: 2048,
+            max_tokens: 3096,
         }),
     })
         .then((response) => response.json())

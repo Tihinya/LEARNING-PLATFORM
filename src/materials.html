@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Learning materials page</title>
+    <title>Chat Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="./index.css" />
     <link rel="stylesheet" href="./normalize.css" />
@@ -16,35 +16,32 @@
       <div class="content">
         <div class="message_box">
           <div class="message_box__container">
-            <div class="message_box__container-text">
-              <div class="message">
-                <div class="message__avatar"></div>
-                <div class="message__container">
-                  "Generated materials generated using your personal Pishing
-                  results"
-                </div>
+            <div class="message_box__container-text" id="chat-box"></div>
+            <div
+              style="
+                position: sticky;
+                display: flex;
+                align-items: center;
+                bottom: 0px;
+                left: 0px;
+                height: 8rem;
+                width: 100%;
+              "
+            >
+              <div class="wrap">
+                <textarea
+                  class="message_box__container-input"
+                  rows="1"
+                  id="chat-input"
+                  placeholder="Send a message..."
+                ></textarea>
               </div>
-              <div class="message message_is-ai">
-                <div class="message__avatar message__avatar_is-ai"></div>
-                <div class="message__container">"Qustion about materials"</div>
-              </div>
-              <div class="message">
-                <div class="message__avatar"></div>
-                <div class="message__container">"More clear materials"</div>
-              </div>
-            </div>
-            <div style="height: 12rem; width: 100%"></div>
-            <div class="wrap">
-              <textarea
-                class="message_box__container-input"
-                rows="1"
-                id="messanger-input"
-                placeholder="Send a message..."
-              ></textarea>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+    <script type="module" src="./materials.js"></script>
   </body>
 </html>
