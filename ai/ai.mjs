@@ -16,7 +16,7 @@ async function handlePrompt(newMessage, messageHistory = [], callback) {
         body: JSON.stringify({
             model: "gpt-3.5-turbo",
             messages: messageHistory,
-            max_tokens: 100,
+            max_tokens: 2048,
         }),
     })
         .then((response) => response.json())
@@ -25,10 +25,9 @@ async function handlePrompt(newMessage, messageHistory = [], callback) {
                 messageHistory.pop()
                 throw data.error
             }
-            callback(data.choices[0].message.content)
-            return data
+            if (callback) callback(data.choices[0].message)
+            return data.choices[0].message.content
         })
-        .catch((err) => console.log(err))
 }
 
 const summary = (data) => {
@@ -81,6 +80,6 @@ const summary = (data) => {
 
 // testPrompt()
 
-handlePrompt("hi", [], summary)
+// handlePrompt("hi", [], summary)
 
 export { handlePrompt }
