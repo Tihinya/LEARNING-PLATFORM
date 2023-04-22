@@ -2,8 +2,8 @@ import express from "express"
 import { __dirname, categories, deafultState } from "./config.mjs"
 import path from "path"
 
-const currentCategorie = ""
-const currentState = Object.assign({}, deafultState)
+let currentCategorie = ""
+let currentState = Object.assign({}, deafultState)
 
 export function IndexPage(req, res) {
     res.sendFile(path.join(__dirname, "..", "src/index.html"))
