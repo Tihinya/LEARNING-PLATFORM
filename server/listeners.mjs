@@ -17,6 +17,14 @@ export function MaterialsPage(req, res) {
     res.sendFile(path.join(__dirname, "..", "src/materials.html"))
 }
 
+export function MaterialsMessages(req, res) {
+    if (currentCategorie === "") {
+        res.redirect("/")
+        return
+    }
+    res.json(State[currentCategorie]["material"])
+}
+
 export function SendPrompt(req, res) {
     const type = req.params.type
     if (currentCategorie === "" || !["test", "material"].includes(type)) {

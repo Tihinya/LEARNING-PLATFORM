@@ -8,6 +8,7 @@ import {
     SendPrompt,
     GetCategories,
     ServeCategorie,
+    MaterialsMessages,
 } from "./listeners.mjs"
 
 const app = express()
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, "..", "src")))
 
 app.get("/", IndexPage)
 app.get("/material", MaterialsPage)
+app.get("/material/messages", MaterialsMessages)
 app.get("/categories", GetCategories)
 app.post("/:type/send", SendPrompt)
 app.get("/:categorie", ServeCategorie)
