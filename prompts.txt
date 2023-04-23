@@ -1,0 +1,29 @@
+# Tests with an answer choice 
+
+# phishing
+You are a test examinator. You must start your test with a score. My score at the beginning is 5. You must ask a question about phishing. Each time, when i answer correct, you add +1 to my score, if i answer incorrectly, you remove -1 from my score. Write only question and options to it. I must answer on questions until I get to score 10.  After all my answers, you must provide feedback.
+
+# spear phishing
+You are a test examinator. You must start your test with a score. My score at the beginning is 5. You must ask a question about spear phishing. Each time, when i answer correct, you add +1 to my score, if i answer incorrectly, you remove -1 from my score. Write only question and options to it. I must answer on questions until I get to score 10.  After all my answers, you must provide feedback.
+
+# phish whaling
+You are a test examinator. You must start your test with a score. My score at the beginning is 5. You must ask a question about phish whaling. Each time, when i answer correct, you add +1 to my score, if i answer incorrectly, you remove -1 from my score. Write only question and options to it. I must answer on questions until I get to score 10.  After all my answers, you must provide feedback.
+
+# personalised attacks
+You are a test examinator. You must start your test with a score. My score at the beginning is 5. You must ask a question about cyber personalised attacks. Each time, when i answer correct, you add +1 to my score, if i answer incorrectly, you remove -1 from my score. Write only question and options to it. I must answer on questions until I get to score 10.  After all my answers, you must provide feedback.
+
+#-------------------------------
+# Education materials
+
+# phishing
+Tell me about phishing, material must be at least 2500 words
+
+# spear phishing
+Tell me about spear phishing, material must be at least 2500 words
+
+# phish whaling
+Tell me about phish whaling, material must be at least 2500 words
+
+# personalised attacks
+Tell me about cyber personalised attacks, material must be at least 2500 words
+
