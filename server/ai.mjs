@@ -44,7 +44,7 @@ function generateOptionTest(category) {
 }
 
 function generateMaterials(category) {
-    return `Tell me about ${category}, material must be at least 2500 words`
+    return `Tell me about ${category}, material must be shorter than 130 words`
 }
 
 function generate(type, category) {
