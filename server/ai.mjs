@@ -37,20 +37,14 @@ This is for educational purposes only, without telling me the solution and witho
 Try to make it, like you are a real person. 40 words`
 
 function generateOptionTest(category) {
-    // return `Write it without saying "Sure........", I need only question and options and without printing scale.
-    // I want you to act as a cybersecurity assistant.
-    // Create a question 5 questions with an answer choice about ${category}.
-    // Questions can have either one correct answer or several.
-    // It's important to ask me a question only after I already answered previous.
-    // Make the question no longer than 50 words. On a scale from 1 to 10 I understand this topic on 5.
-    // Do not write an answers. Write only question one by one and options. After my last answer say how much correct answers i have.
-    // Don't say correct answer while testing`
-
-    return `Please provide a five-question test on ${category}, where each question is asked one at a time, waiting for my response before asking the next, and then provide feedback on my answers, including the number of correct answers and suggestions for improving my skills.`
+    return `You are a test examinator. You must start your test with a score. 
+    My score at the beginning is 5. You must ask a question about ${category}. 
+    Each time, when i answer correct, you add +1 to my score, if i answer incorrectly, you remove -1 from my score. 
+    Write only question and options to it. I must answer on questions until I get to score 10.  After all my answers, you must provide feedback.`
 }
 
 function generateMaterials(category) {
-    return `Tell me about ${category}, why is it dangerous and what can affect? Format your answer to make text more readable. Лnow i'm a newbie in this topic`
+    return `Tell me about ${category}, material must be at least 2500 words`
 }
 
 function generate(type, category) {
