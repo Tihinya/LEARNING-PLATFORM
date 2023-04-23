@@ -199,6 +199,7 @@ html {
     width: 48rem;
 
     word-wrap: break-word;
+    white-space: pre-wrap;
 }
 
 .materials {
@@ -217,4 +218,40 @@ html {
     justify-content: center;
 
     width: 100%;
+}
+
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader_is-hidden {
+    visibility: hidden;
+}
+
+.loader .spin {
+    position: relative;
+    box-sizing: border-box;
+    display: block;
+
+    margin-left: 20px;
+    height: 2.5rem;
+    width: 2.5rem;
+
+    border: 6px solid #ede7f6;
+    border-top: 6px solid #6a1b9a;
+    border-radius: 50%;
+
+    -webkit-animation: loading 1.5s linear infinite;
+    animation: loading 1.5s linear infinite;
+}
+
+@keyframes loading {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

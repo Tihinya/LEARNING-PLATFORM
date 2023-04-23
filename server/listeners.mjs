@@ -1,6 +1,6 @@
 import { __dirname, categories, deafultState } from "./config.mjs"
 import path from "path"
-import { handlePrompt } from "./ai.mjs"
+import { generate, handlePrompt } from "./ai.mjs"
 
 let currentCategorie = ""
 let State = Object.assign({}, deafultState)
@@ -22,7 +22,23 @@ export function MaterialsMessages(req, res) {
         res.redirect("/")
         return
     }
-    res.json(State[currentCategorie]["material"])
+
+    if (State[currentCategorie]["material"].length > 0) {
+        res.json(State[currentCategorie]["material"].slice(1))
+        return
+    }
+    const catecorieSnap = currentCategorie
+    handlePrompt(
+        generate("material", currentCategorie),
+        State[catecorieSnap]["material"],
+        ({ content, role }) => {
+            State[catecorieSnap]["material"].push({ role, content })
+            res.json(State[currentCategorie]["material"].slice(1))
+        }
+    ).catch((e) => {
+        console.log(e)
+        res.status(500).end()
+    })
 }
 
 export function SendPrompt(req, res) {
@@ -32,15 +48,16 @@ export function SendPrompt(req, res) {
         return
     }
 
+    const prompt =
+        State[currentCategorie][type].length > 0
+            ? req.body.message
+            : generate(type, currentCategorie)
+
     const catecorieSnap = currentCategorie
-    handlePrompt(
-        req.body.message,
-        State[catecorieSnap][type],
-        ({ content, role }) => {
-            State[catecorieSnap][type].push({ role, content })
-            res.json(State[currentCategorie][type])
-        }
-    ).catch((e) => {
+    handlePrompt(prompt, State[catecorieSnap][type], ({ content, role }) => {
+        State[catecorieSnap][type].push({ role, content })
+        res.json(State[currentCategorie][type].slice(1))
+    }).catch((e) => {
         console.log(e)
         res.status(500).end()
     })
@@ -55,7 +72,22 @@ export function ServeCategorie(req, res) {
 
     if (categories.includes(categorie)) {
         currentCategorie = `${categorie}`
-        res.json(State[categorie]["test"])
+        if (State[categorie]["test"].length > 0) {
+            res.json(State[categorie]["test"].slice(1))
+            return
+        }
+        const catecorieSnap = currentCategorie
+        handlePrompt(
+            generate("test", currentCategorie),
+            State[catecorieSnap]["test"],
+            ({ content, role }) => {
+                State[catecorieSnap]["test"].push({ role, content })
+                res.json(State[currentCategorie]["test"].slice(1))
+            }
+        ).catch((e) => {
+            console.log(e)
+            res.status(500).end()
+        })
     } else {
         res.json({ status: "No access" })
     }

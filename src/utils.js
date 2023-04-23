@@ -1,8 +1,9 @@
 const chatBox = document.querySelector("#chat-box")
+const spinner = document.querySelector("#spinner")
 
+spinner.classList.add("loader_is-hidden")
+let disabled = false
 function handleInput(link) {
-    let disabled = false
-
     return (e) => {
         if (e.code !== "Enter" || e.shiftKey || e.ctrlKey || disabled) {
             return
@@ -17,6 +18,7 @@ function handleInput(link) {
         }
 
         disabled = true
+        spinner.classList.remove("loader_is-hidden")
         fetch(`/${link}/send`, {
             method: "POST",
             headers: {
@@ -29,7 +31,10 @@ function handleInput(link) {
                 (r) => updateMessages(true)(...r),
                 (e) => console.log(e)
             )
-            .finally(() => (disabled = false))
+            .finally(() => {
+                spinner.classList.add("loader_is-hidden")
+                disabled = false
+            })
 
         updateMessages()({ role: "user", content: message })
         e.target.value = ""
@@ -75,4 +80,4 @@ function updateMessages(override = false) {
     }
 }
 
-export { updateMessages, handleInput }
+export { updateMessages, handleInput, disabled, spinner }
