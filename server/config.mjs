@@ -7,7 +7,7 @@ const port = 3000
 const categories = [
     "Phishing",
     "Spear Phishing",
-    "Whaling",
+    "Whaling cybersecurity",
     "Personalised Attacks",
 ]
 const deafultState = categories.reduce(

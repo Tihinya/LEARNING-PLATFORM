@@ -1,4 +1,4 @@
-import { handleInput, updateMessages } from "./utils.js"
+import { handleInput, updateMessages, spinner } from "./utils.js"
 
 const chatInput = document.querySelector("#chat-input")
 const categoriesList = document.querySelector("#categories-list")
@@ -23,9 +23,15 @@ function updateCategory({ categories = [] }) {
                 activeButton.classList.remove("categories__item_is-active")
             activeButton = category
             category.classList.add("categories__item_is-active")
+
+            spinner.classList.remove("loader_is-hidden")
+
             fetch(`/${categoryName}`)
                 .then((r) => r.json())
                 .then((r) => updateMessages(true)(...r), console.log)
+                .finally(() => {
+                    spinner.classList.add("loader_is-hidden")
+                })
         }
 
         categoriesList.appendChild(category)
