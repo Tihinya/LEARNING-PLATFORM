@@ -14,7 +14,7 @@ The core feature of the platform we want to focus on during the hackathon is aut
 
 `Problem`: low awareness about social engineered attacks for employees within companies.
 
-`Solution`: rise the awareness by
+`Solution`: rise the awareness
 
 ## 🔥 Features
 
@@ -51,7 +51,7 @@ The core feature of the platform we want to focus on during the hackathon is aut
 </div>
 <div style="display:flex; align-items:center">
     <h4 style="padding-right:7px">Frontend</h4>
-    <<img src="https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white" style="height:30px; padding-right:7px">
+    <img src="https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white" style="height:30px; padding-right:7px">
      <img src="https://img.shields.io/badge/html5%20-%23E34F26.svg?&style=for-the-badge&logo=html5&logoColor=white" style="height:30px; padding-right:7px">
     <img src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E" style="height:30px; padding-right:7px">
 
@@ -63,4 +63,4 @@ The core feature of the platform we want to focus on during the hackathon is aut
 -   **Martin Vahe** (Discord: mvahe),
 -   **Deniss Orlov** (Discord: Denis),
 -   **Denis Petrov** (Aka: Dolphin),
--   **Aleksander Pavlov** (Discord: chelovechek_4172)
+-   **Aleksander Pavlov** (Discord: chelovechek)
