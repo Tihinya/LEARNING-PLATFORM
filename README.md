@@ -36,10 +36,7 @@ The core feature of the platform we want to focus on during the hackathon is aut
 
 ## 🪴 Project View
 
-<div >
-  <img src="https://github.com/Tihinya/LEARNING-PLATFORM/assets/86482047/fea5f202-6e4f-4977-9ea7-ed4e3c44607d" width="1238" style="border-radius:2.5%;margin-bottom: 15px">
-
-</div>
+<img src="https://github.com/Tihinya/LEARNING-PLATFORM/assets/86482047/fea5f202-6e4f-4977-9ea7-ed4e3c44607d" width="1238" style="border-radius:2.5%;margin-bottom: 15px">
 
 ## 🧑‍💻 Running Locally
 
@@ -54,7 +51,7 @@ The core feature of the platform we want to focus on during the hackathon is aut
 </div>
 <div style="display:flex; align-items:center">
     <h4 style="padding-right:7px">Frontend</h4>
-    <img src="https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white" style="height:30px; padding-right:7px">
+    <<img src="https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white" style="height:30px; padding-right:7px">
      <img src="https://img.shields.io/badge/html5%20-%23E34F26.svg?&style=for-the-badge&logo=html5&logoColor=white" style="height:30px; padding-right:7px">
     <img src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E" style="height:30px; padding-right:7px">
 
